@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://b17n2oeox81d2"]
+
+[ext_resource type="Script" path="res://Levels/level_scene.gd" id="1_tx0x0"]
+[ext_resource type="Texture2D" uid="uid://cf17b8lanrj6q" path="res://icon.svg" id="2_825pe"]
+[ext_resource type="Script" path="res://Levels/path_follow_2d.gd" id="2_yeeav"]
+
+[sub_resource type="Curve2D" id="Curve2D_pxm0e"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 26, 67, 0, 0, 0, 0, 166, 78, 0, 0, 0, 0, 243, 71, 0, 0, 0, 0, 280, 67, 0, 0, 0, 0, 319, 71, 0, 0, 0, 0, 357, 80)
+}
+point_count = 6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1i5v"]
+
+[node name="LevelScene" type="Node2D"]
+script = ExtResource("1_tx0x0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-189, -75)
+curve = SubResource("Curve2D_pxm0e")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(26, 67)
+rotation = 0.0784103
+rotates = false
+loop = false
+script = ExtResource("2_yeeav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_825pe")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D"]
+position = Vector2(26, 67)
+rotation = 0.0784103
+rotates = false
+loop = false
+script = ExtResource("2_yeeav")
+
+[node name="FollowArea" type="Area2D" parent="Path2D/PathFollow2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D2/FollowArea"]
+shape = SubResource("CircleShape2D_e1i5v")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
+position = Vector2(26, 67)
+rotation = 0.0784103
+rotates = false
+loop = false
+script = ExtResource("2_yeeav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D3"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_825pe")
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="Path2D"]
+position = Vector2(26, 67)
+rotation = 0.0784103
+rotates = false
+loop = false
+script = ExtResource("2_yeeav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D4"]
+scale = Vector2(0.11, 0.11)
+texture = ExtResource("2_825pe")
