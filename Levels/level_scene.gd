@@ -1,9 +1,11 @@
 extends Node2D
 
-@onready var player_cam: Camera2D = $Player_cam
 @onready var player: CharacterBody2D = $Player
+@onready var follow_area: Area2D = $Path2D/FollowPath/FollowArea
 
 
+
+var on_timer:bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -11,4 +13,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	On_Countdown()
+
+
+func On_Countdown() -> void:
+	if on_timer:
+		player.global_position = follow_area.global_position
+func _on_level_start_timer_timeout() -> void:
+	on_timer = false

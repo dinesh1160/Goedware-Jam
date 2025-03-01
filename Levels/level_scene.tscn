@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b17n2oeox81d2"]
+[gd_scene load_steps=7 format=3 uid="uid://b17n2oeox81d2"]
 
 [ext_resource type="Script" path="res://Levels/level_scene.gd" id="1_tx0x0"]
 [ext_resource type="Texture2D" uid="uid://cf17b8lanrj6q" path="res://icon.svg" id="2_825pe"]
+[ext_resource type="PackedScene" uid="uid://db1rba0ef1gfq" path="res://Player/player.tscn" id="2_bvktw"]
 [ext_resource type="Script" path="res://Levels/path_follow_2d.gd" id="2_yeeav"]
 
 [sub_resource type="Curve2D" id="Curve2D_pxm0e"]
@@ -33,16 +34,16 @@ script = ExtResource("2_yeeav")
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_825pe")
 
-[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D"]
+[node name="FollowPath" type="PathFollow2D" parent="Path2D"]
 position = Vector2(26, 67)
 rotation = 0.0784103
 rotates = false
 loop = false
 script = ExtResource("2_yeeav")
 
-[node name="FollowArea" type="Area2D" parent="Path2D/PathFollow2D2"]
+[node name="FollowArea" type="Area2D" parent="Path2D/FollowPath"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D2/FollowArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/FollowPath/FollowArea"]
 shape = SubResource("CircleShape2D_e1i5v")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
@@ -66,3 +67,11 @@ script = ExtResource("2_yeeav")
 [node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D4"]
 scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_825pe")
+
+[node name="LevelStart_Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("2_bvktw")]
+
+[connection signal="timeout" from="LevelStart_Timer" to="." method="_on_level_start_timer_timeout"]
