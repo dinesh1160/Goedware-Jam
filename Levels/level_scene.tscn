@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_pxm0e"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 26, 67, 0, 0, 0, 0, 166, 78, 0, 0, 0, 0, 243, 71, 0, 0, 0, 0, 280, 67, 0, 0, 0, 0, 319, 71, 0, 0, 0, 0, 357, 80)
+"points": PackedVector2Array(0, 0, 0, 0, -21, 63, 0, 0, 0, 0, 166, 78, 0, 0, 0, 0, 243, 71, 0, 0, 0, 0, 280, 67, 0, 0, 0, 0, 319, 71, 0, 0, 0, 0, 403, 72)
 }
 point_count = 6
 
@@ -19,12 +19,14 @@ script = ExtResource("1_tx0x0")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
+[node name="Player" parent="." instance=ExtResource("2_bvktw")]
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-189, -75)
 curve = SubResource("Curve2D_pxm0e")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(26, 67)
+position = Vector2(-21, 63)
 rotation = 0.0784103
 rotates = false
 loop = false
@@ -35,7 +37,7 @@ scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_825pe")
 
 [node name="FollowPath" type="PathFollow2D" parent="Path2D"]
-position = Vector2(26, 67)
+position = Vector2(-21, 63)
 rotation = 0.0784103
 rotates = false
 loop = false
@@ -47,7 +49,7 @@ script = ExtResource("2_yeeav")
 shape = SubResource("CircleShape2D_e1i5v")
 
 [node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
-position = Vector2(26, 67)
+position = Vector2(-21, 63)
 rotation = 0.0784103
 rotates = false
 loop = false
@@ -58,7 +60,7 @@ scale = Vector2(0.11, 0.11)
 texture = ExtResource("2_825pe")
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Path2D"]
-position = Vector2(26, 67)
+position = Vector2(-21, 63)
 rotation = 0.0784103
 rotates = false
 loop = false
@@ -70,8 +72,8 @@ texture = ExtResource("2_825pe")
 
 [node name="LevelStart_Timer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 autostart = true
 
-[node name="Player" parent="." instance=ExtResource("2_bvktw")]
-
+[connection signal="body_exited" from="Path2D/FollowPath/FollowArea" to="." method="_on_follow_area_body_exited"]
 [connection signal="timeout" from="LevelStart_Timer" to="." method="_on_level_start_timer_timeout"]

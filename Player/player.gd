@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED: float = 40
+const SPEED: float = 50
 
 func _physics_process(delta: float) -> void:
 	get_input()
@@ -8,6 +8,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 func get_input() -> void:
-	var input_direction = Input.get_vector("Left","Right","Up","Down");
+	var input_direction = Input.get_vector("Left","Right","Up","Down"); #Vector for input vector
 	velocity = input_direction * SPEED
 	
