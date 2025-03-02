@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbnoxc1p8qikg"]
+
+[ext_resource type="Texture2D" uid="uid://cukkbto31wm3i" path="res://Assets/antsheetwalk.png" id="1_loo4i"]
+[ext_resource type="Texture2D" uid="uid://b68ajpep1tjil" path="res://Assets/exclamation-mark.png" id="2_ftyfb"]
+[ext_resource type="Script" path="res://Player/ant.gd" id="2_ouso3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35v2s"]
+atlas = ExtResource("1_loo4i")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y80b"]
+atlas = ExtResource("1_loo4i")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4x7m"]
+atlas = ExtResource("1_loo4i")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ir6ae"]
+atlas = ExtResource("1_loo4i")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hvj2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35v2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y80b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4x7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ir6ae")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ant" type="AnimatedSprite2D"]
+scale = Vector2(0.17, 0.17)
+sprite_frames = SubResource("SpriteFrames_hvj2d")
+autoplay = "default"
+frame_progress = 0.144064
+script = ExtResource("2_ouso3")
+
+[node name="Exclamation-mark" type="Sprite2D" parent="."]
+position = Vector2(-2, -63)
+texture = ExtResource("2_ftyfb")

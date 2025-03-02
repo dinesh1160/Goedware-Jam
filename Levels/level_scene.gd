@@ -26,6 +26,10 @@ func _on_level_start_timer_timeout() -> void:
 
 func _on_follow_area_body_exited(body: Node2D) -> void:
 	if body == player:
-		player.queue_free()
+		get_tree().call_group("Ant", "show_exclamation")
 		print("die");
+		
+func _on_follow_area_body_entered(body: Node2D) -> void:
+	if body == player:
+		get_tree().call_group("Ant", "show_exclamation")
 		

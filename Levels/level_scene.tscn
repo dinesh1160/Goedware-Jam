@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://b17n2oeox81d2"]
 
 [ext_resource type="Script" path="res://Levels/level_scene.gd" id="1_tx0x0"]
-[ext_resource type="Texture2D" uid="uid://cf17b8lanrj6q" path="res://icon.svg" id="2_825pe"]
 [ext_resource type="PackedScene" uid="uid://db1rba0ef1gfq" path="res://Player/player.tscn" id="2_bvktw"]
 [ext_resource type="Script" path="res://Levels/path_follow_2d.gd" id="2_yeeav"]
+[ext_resource type="PackedScene" uid="uid://cbnoxc1p8qikg" path="res://Player/ant.tscn" id="4_0ml0c"]
 
 [sub_resource type="Curve2D" id="Curve2D_pxm0e"]
 _data = {
@@ -32,9 +32,7 @@ rotates = false
 loop = false
 script = ExtResource("2_yeeav")
 
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
-scale = Vector2(0.11, 0.11)
-texture = ExtResource("2_825pe")
+[node name="Ant" parent="Path2D/PathFollow2D" instance=ExtResource("4_0ml0c")]
 
 [node name="FollowPath" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-21, 63)
@@ -44,6 +42,7 @@ loop = false
 script = ExtResource("2_yeeav")
 
 [node name="FollowArea" type="Area2D" parent="Path2D/FollowPath"]
+scale = Vector2(0.76, 0.76)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/FollowPath/FollowArea"]
 shape = SubResource("CircleShape2D_e1i5v")
@@ -55,9 +54,7 @@ rotates = false
 loop = false
 script = ExtResource("2_yeeav")
 
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D3"]
-scale = Vector2(0.11, 0.11)
-texture = ExtResource("2_825pe")
+[node name="Ant" parent="Path2D/PathFollow2D3" instance=ExtResource("4_0ml0c")]
 
 [node name="PathFollow2D4" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-21, 63)
@@ -66,14 +63,13 @@ rotates = false
 loop = false
 script = ExtResource("2_yeeav")
 
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D4"]
-scale = Vector2(0.11, 0.11)
-texture = ExtResource("2_825pe")
+[node name="Ant" parent="Path2D/PathFollow2D4" instance=ExtResource("4_0ml0c")]
 
 [node name="LevelStart_Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 autostart = true
 
+[connection signal="body_entered" from="Path2D/FollowPath/FollowArea" to="." method="_on_follow_area_body_entered"]
 [connection signal="body_exited" from="Path2D/FollowPath/FollowArea" to="." method="_on_follow_area_body_exited"]
 [connection signal="timeout" from="LevelStart_Timer" to="." method="_on_level_start_timer_timeout"]
