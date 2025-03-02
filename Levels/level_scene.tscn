@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b17n2oeox81d2"]
+[gd_scene load_steps=8 format=3 uid="uid://b17n2oeox81d2"]
 
 [ext_resource type="Script" path="res://Levels/level_scene.gd" id="1_tx0x0"]
 [ext_resource type="PackedScene" uid="uid://db1rba0ef1gfq" path="res://Player/player.tscn" id="2_bvktw"]
@@ -12,6 +12,10 @@ _data = {
 point_count = 6
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e1i5v"]
+radius = 19.7807
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gsa63"]
+radius = 9.05538
 
 [node name="LevelScene" type="Node2D"]
 script = ExtResource("1_tx0x0")
@@ -47,6 +51,11 @@ scale = Vector2(0.76, 0.76)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/FollowPath/FollowArea"]
 shape = SubResource("CircleShape2D_e1i5v")
 
+[node name="WarningArea" type="Area2D" parent="Path2D/FollowPath"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/FollowPath/WarningArea"]
+shape = SubResource("CircleShape2D_gsa63")
+
 [node name="PathFollow2D3" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-21, 63)
 rotation = 0.0784103
@@ -70,6 +79,7 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[connection signal="body_entered" from="Path2D/FollowPath/FollowArea" to="." method="_on_follow_area_body_entered"]
 [connection signal="body_exited" from="Path2D/FollowPath/FollowArea" to="." method="_on_follow_area_body_exited"]
+[connection signal="body_entered" from="Path2D/FollowPath/WarningArea" to="." method="_on_warning_area_body_entered"]
+[connection signal="body_exited" from="Path2D/FollowPath/WarningArea" to="." method="_on_warning_area_body_exited"]
 [connection signal="timeout" from="LevelStart_Timer" to="." method="_on_level_start_timer_timeout"]

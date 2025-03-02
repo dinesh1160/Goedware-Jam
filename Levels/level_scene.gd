@@ -24,12 +24,16 @@ func _on_level_start_timer_timeout() -> void:
 	print("Start");
 
 
-func _on_follow_area_body_exited(body: Node2D) -> void:
+func _on_follow_area_body_exited(body: Node2D) -> void: #follow Area logic
 	if body == player:
-		get_tree().call_group("Ant", "show_exclamation")
 		print("die");
+		player.queue_free()
+		get_tree().call_group("Ant", "show_exclamation") #turns the exclamation off after the player is dead
 		
-func _on_follow_area_body_entered(body: Node2D) -> void:
+func _on_warning_area_body_exited(body: Node2D) -> void: #Warning Area Logic
+	if body == player:
+		get_tree().call_group("Ant", "show_exclamation") #connects to the function in ant and toggles exclamation mark
+
+func _on_warning_area_body_entered(body: Node2D) -> void:
 	if body == player:
 		get_tree().call_group("Ant", "show_exclamation")
-		
